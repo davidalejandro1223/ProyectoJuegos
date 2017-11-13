@@ -17,8 +17,17 @@ def autenticar(request):
         user = authenticate(username=usuario, password=contrasena)
         if user is not None:
             login(request, user)
-            return redirect('inicio')
+            return redirect('inicio')           
         else:
             return HttpResponse('usuario no existe')
 
     return render(request, 'login.html', {})
+
+@login_required(login_url = '/')
+def desautenticar(request):
+    logout(request)
+    return redirect('autenticar')
+
+@login_required(login_url = '/')
+def inicio(request):
+    return render(request, 'inicio.html', context=None)

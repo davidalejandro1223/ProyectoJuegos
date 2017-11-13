@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block style_content %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/inicio.css' %}">
+{% endblock style_content %}
+
+{% block content %}
+<section class="section-container">
+    <div class="container inicio-container">
+        <div class="row">
+            <div class="col-12 ">
+                <h2 class="text-center">Bienvenido {{user.first_name}} {{user.last_name}}, ¿que desea Jugar?</h2>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-container">
+    <div class="container inicio-container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6 col-btn">
+                <div class="btn-group-vertical btn-group-lg" role="group">
+                    <input type="button" class="btn btn-outline-primary btn-block" value="La Llorona" href="#">
+                    <input type="button" class="btn btn-outline-primary btn-block" value="Elude Asteroids" href="#">
+                    <input type="button" class="btn btn-outline-primary btn-block" value="Calaveras" href="#">
+                    <input type="button" class="btn btn-outline-primary btn-block" value="" href="#">
+                    <input type="button" class="btn btn-outline-primary btn-block" value="" href="#">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
