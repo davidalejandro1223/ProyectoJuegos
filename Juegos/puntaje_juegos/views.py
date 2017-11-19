@@ -21,3 +21,7 @@ def JuegoLlorona(request):
 @login_required(login_url = '/')
 def juego2048(request):
     return render(request, '2048.html')
+
+@login_required(login_url = '/')
+def juego2048(request):
+    return render(request, 'charizard.html')
