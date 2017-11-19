@@ -30,4 +30,7 @@ def desautenticar(request):
 
 @login_required(login_url = '/')
 def inicio(request):
-    return render(request, 'inicio.html', context=None)
+    context = {
+        'active_inicio' : 'active',
+    }
+    return render(request, 'inicio.html', context)

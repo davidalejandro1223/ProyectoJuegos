@@ -2,9 +2,20 @@
 	font-size: 16px;
 }
 body{
-	background-color: #eee;
+	background-color: #2B2C28;
 }
 
 nav{
+	background-color: #131515;
 	border-radius: 0 0 1em 1em;
 }
+
+.dropdown-menu{
+	background-color: #131515;
+	color: #FFFAFB;
+}
+
+.dropdown-menu > a {
+	color: #FFFAFB;
+}
+

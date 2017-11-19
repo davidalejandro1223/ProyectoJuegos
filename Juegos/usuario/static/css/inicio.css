@@ -6,8 +6,11 @@
 }
 
 .inicio-container{
-	background-color: white;
-	border-radius: 1em;
+	color: #FFFAFB;
+	--background-color: #131515;
+	border-radius: .8em;
+	--border-color: #131515;
+	border: .1em solid #131515;
 	padding: 2em 0;
 }
 

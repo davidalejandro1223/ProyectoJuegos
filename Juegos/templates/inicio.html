@@ -2,7 +2,9 @@
 {% load staticfiles %}
 
 {% block style_content %}
-	<link rel="stylesheet" type="text/css" href="{% static 'css/inicio.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/inicio.css' %}">
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    
 {% endblock style_content %}
 
 {% block content %}
@@ -21,14 +23,15 @@
         <div class="row justify-content-center">
             <div class="col-12 col-md-6 col-btn">
                 <div class="btn-group-vertical btn-group-lg" role="group">
-                    <input type="button" class="btn btn-outline-primary btn-block" value="La Llorona" href="#">
-                    <input type="button" class="btn btn-outline-primary btn-block" value="Elude Asteroids" href="#">
-                    <input type="button" class="btn btn-outline-primary btn-block" value="Calaveras" href="#">
-                    <input type="button" class="btn btn-outline-primary btn-block" value="" href="#">
+                    <input type="button" class="btn btn-outline-primary btn-block" value="La Llorona" id="llorona">
+                    <input type="button" class="btn btn-outline-primary btn-block" value="Elude Asteroids" id="elude">
+                    <input type="button" class="btn btn-outline-primary btn-block" value="Calaveras" id="calaveras" >
+                    <input type="button" class="btn btn-outline-primary btn-block" value="2048" id="2048">
                     <input type="button" class="btn btn-outline-primary btn-block" value="" href="#">
                 </div>
             </div>
         </div>
     </div>
 </section>
+<script src="{% static 'js/inicio.js' %}"></script>
 {% endblock content %}
