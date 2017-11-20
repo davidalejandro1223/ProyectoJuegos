@@ -73,24 +73,24 @@ var game = (function () {
     function preloadImages () {
         for (var i = 1; i <= 2; i++) {
             var evilImage = new Image();
-            evilImage.src = 'images/squirtle' + i + '.png';
+            evilImage.src = '../static/Charizard/images/squirtle' + i + '.png';
             evilImages.animation[i-1] = evilImage;
             var bossImage = new Image();
-            bossImage.src = 'images/blastoise' + i + '.png';
+            bossImage.src = '../static/Charizard/images/blastoise' + i + '.png';
             bossImages.animation[i-1] = bossImage;
         }
-        evilImages.killed.src = 'images/squirtle_muerto.png';
-        bossImages.killed.src = 'images/blastoise_muerto.png';
+        evilImages.killed.src = '../static/Charizard/images/squirtle_muerto.png';
+        bossImages.killed.src = '../static/Charizard/images/blastoise_muerto.png';
         bgMain = new Image();
-        bgMain.src = 'images/fondovertical.png';
+        bgMain.src = '../static/Charizard/images/fondovertical.png';
         bgBoss = new Image();
-        bgBoss.src = 'images/fondovertical_jefe.png';
+        bgBoss.src = '../static/Charizard/images/fondovertical_jefe.png';
         playerShotImage = new Image();
-        playerShotImage.src = 'images/fuego.png';
+        playerShotImage.src = '../static/Charizard/images/fuego.png';
         evilShotImage = new Image();
-        evilShotImage.src = 'images/burbujas.png';
+        evilShotImage.src = '../static/Charizard/images/burbujas.png';
         playerKilledImage = new Image();
-        playerKilledImage.src = 'images/charizard_muerto.png';
+        playerKilledImage.src = '../static/Charizard/images/charizard_muerto.png';
 
     }
 
@@ -141,7 +141,7 @@ var game = (function () {
             defaultHeight : 66
         };
         player = new Image();
-        player.src = 'images/charizard1.png';
+        player.src = '../static/Charizard/images/charizard1.png';
         player.posX = (canvas.width / 2) - (player.width / 2);
         player.posY = canvas.height - (player.height == 0 ? settings.defaultHeight : player.height) - settings.marginBottom;
         player.life = life;
@@ -621,3 +621,5 @@ var game = (function () {
         init: init
     }
 })();
+
+$(document).ready(game.init)

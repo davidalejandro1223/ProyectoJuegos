@@ -13,3 +13,7 @@ $("#calaveras").click(function () {
 $("#2048").click(function () {
     window.location = "inicio/2048"
 });
+
+$("#charizard").click(function () {
+    window.location = "inicio/Charizard"
+});
