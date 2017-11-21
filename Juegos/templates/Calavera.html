@@ -25,25 +25,6 @@
 			<img id="explosion" src="{% static 'calavera/imagenes/explosion.png' %}"/><br>
 			
 			<div id="textDiv" >
-			<script type="text/javascript">  
-				var PageName;
-				window.onload = function(){
-				
-					function ParseURLParameter(Parameter){
-						var FullURL= window.location.search.substring(1);
-						var ParametersArray= FullURL.split('&');
-						for(var i=0;i<ParametersArray.length;i++){
-							var CurrentParameter =ParametersArray[i].split('=');
-							if(CurrentParameter[0] == Parameter){
-								return CurrentParameter[1];
-							}
-						}
-					}
-					PageName = ParseURLParameter('usuario');
-					var div = document.getElementById("textDiv");  
-					div.textContent = "Usuario: "+PageName;
-					}
-			</script>
 		</div>
 			
 		</aside>

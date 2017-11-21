@@ -42,7 +42,6 @@ function inicio(){
 		duracion = 0;
 		run();		
 	});
-	$("#recomendaciones").load("recomendaciones.html");
 }
 
 function aleatorio(tope){
@@ -156,8 +155,18 @@ function run(){
 		contexto.clearRect(0,0,700,500);
 		contexto.drawImage(buffer, 0, 0);
 		$("button").css("display","inline");
-		
+		enviarDatos(parseInt(duracion/10));
 	}
+}
+
+function enviarDatos(puntaje){
+	$.ajax({
+		type: 'POST',
+		url: 'EludeAsteroids/enviar',
+		data: {
+			'puntaje': puntaje,
+		}
+	})
 }
 
 

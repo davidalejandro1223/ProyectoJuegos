@@ -5,10 +5,12 @@ window.requestAnimFrame = (function () {
         window.mozRequestAnimationFrame     ||
         window.oRequestAnimationFrame       ||
         window.msRequestAnimationFrame      ||
-        function ( /* function */ callback, /* DOMElement */ element) {
+        function (  /* function */ callback, /* DOMElement */ element) {
             window.setTimeout(callback, 1000 / 60);
+           
         };
 })();
+
 arrayRemove = function (array, from) {
     var rest = array.slice((from) + 1 || array.length);
     array.length = from < 0 ? array.length + from : from;
@@ -66,8 +68,8 @@ var game = (function () {
         now = 0;
 
     function loop() {
-        update();
-        draw();
+            update();
+            draw();
     }
 
     function preloadImages () {
@@ -98,8 +100,6 @@ var game = (function () {
 
         preloadImages();
 
-        showBestScores();
-
         canvas = document.getElementById('canvas');
         ctx = canvas.getContext("2d");
 
@@ -121,7 +121,8 @@ var game = (function () {
             loop();
             requestAnimFrame(anim);
         }
-        anim();
+        anim();    
+        
     }
 
     function showLifeAndScore () {
@@ -183,8 +184,8 @@ var game = (function () {
                 }, 500);
 
             } else {
-                saveFinalScore();
                 youLoose = true;
+                enviarDatos(player.score);
             }
         };
 
@@ -439,6 +440,9 @@ var game = (function () {
 
         if (youLoose) {
             showGameOver();
+            for (var i=0; i<10; i++){
+                window.clearTimeout(i);
+            }
             return;
         }
 
@@ -515,111 +519,19 @@ var game = (function () {
         }
     }
 
-    /******************************* MEJORES PUNTUACIONES (LOCALSTORAGE) *******************************/
-    function saveFinalScore() {
-        localStorage.setItem(getFinalScoreDate(), getTotalScore());
-        showBestScores();
-        removeNoBestScores();
-    }
-
-    function getFinalScoreDate() {
-        var date = new Date();
-        return fillZero(date.getDay()+1)+'/'+
-            fillZero(date.getMonth()+1)+'/'+
-            date.getFullYear()+' '+
-            fillZero(date.getHours())+':'+
-            fillZero(date.getMinutes())+':'+
-            fillZero(date.getSeconds());
-    }
-
-    function fillZero(number) {
-        if (number < 10) {
-            return '0' + number;
-        }
-        return number;
-    }
-
-    function getBestScoreKeys() {
-        var bestScores = getAllScores();
-        bestScores.sort(function (a, b) {return b - a;});
-        bestScores = bestScores.slice(0, totalBestScoresToShow);
-        var bestScoreKeys = [];
-        for (var j = 0; j < bestScores.length; j++) {
-            var score = bestScores[j];
-            for (var i = 0; i < localStorage.length; i++) {
-                var key = localStorage.key(i);
-                if (parseInt(localStorage.getItem(key)) == score) {
-                    bestScoreKeys.push(key);
-                }
-            }
-        }
-        return bestScoreKeys.slice(0, totalBestScoresToShow);
-    }
-
-    function getAllScores() {
-        var all = [];
-        for (var i=0; i < localStorage.length; i++) {
-            all[i] = (localStorage.getItem(localStorage.key(i)));
-        }
-        return all;
-    }
-
-    function showBestScores() {
-        var bestScores = getBestScoreKeys();
-        var bestScoresList = document.getElementById('puntuaciones');
-        if (bestScoresList) {
-            clearList(bestScoresList);
-            for (var i=0; i < bestScores.length; i++) {
-                addListElement(bestScoresList, bestScores[i], i==0?'negrita':null);
-                addListElement(bestScoresList, localStorage.getItem(bestScores[i]), i==0?'negrita':null);
-            }
-        }
-    }
-
-    function clearList(list) {
-        list.innerHTML = '';
-        addListElement(list, "Fecha");
-        addListElement(list, "Puntos");
-    }
-
-    function addListElement(list, content, className) {
-        var element = document.createElement('li');
-        if (className) {
-            element.setAttribute("class", className);
-        }
-        element.innerHTML = content;
-        list.appendChild(element);
-    }
-
-    // extendemos el objeto array con un metodo "containsElement"
-    Array.prototype.containsElement = function(element) {
-        for (var i = 0; i < this.length; i++) {
-            if (this[i] == element) {
-                return true;
-            }
-        }
-        return false;
-    };
-
-    function removeNoBestScores() {
-        var scoresToRemove = [];
-        var bestScoreKeys = getBestScoreKeys();
-        for (var i=0; i < localStorage.length; i++) {
-            var key = localStorage.key(i);
-            if (!bestScoreKeys.containsElement(key)) {
-                scoresToRemove.push(key);
-            }
-        }
-        for (var j = 0; j < scoresToRemove.length; j++) {
-            var scoreToRemoveKey = scoresToRemove[j];
-            localStorage.removeItem(scoreToRemoveKey);
-        }
-    }
-    /******************************* FIN MEJORES PUNTUACIONES *******************************/
-
     return {
         init: init
     }
 })();
 
 $(document).ready(game.init)
+
+function enviarDatos(puntaje) {
+    $.ajax({
+        type: 'POST',
+        url: 'Charizard/enviar',
+        data:{
+            'puntaje':puntaje,
+        }
+    })
+}

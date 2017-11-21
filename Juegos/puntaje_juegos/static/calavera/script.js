@@ -15,17 +15,6 @@ $(document).ready(inicio);
 $(document).keydown(capturaTeclado);
 var PageName;
 
-function ParseURLParameter(Parameter){
-	
-	var FullURL= window.location.search.substring(1);
-	var ParametersArray= FullURL.split('&');
-	for(var i=0;i<ParametersArray.length;i++){
-		var CurrentParameter =ParametersArray[i].split('=');
-		if(CurrentParameter[0] == Parameter){
-			return CurrentParameter[1];
-		}
-	}
-}
 function inicio(){
 	var lienzo = $("#lienzo")[0];
 	var contexto = lienzo.getContext("2d");
@@ -253,9 +242,17 @@ function run(){
 		contextoBuffer.fillText(parseInt(puntuacion)+" pts", 250, 250);
 		contexto.clearRect(0,0,700,500);
 		contexto.drawImage(buffer, 0, 0);
-		
-		window.location="reg.php?usuario="+PageName+"&puntaje="+puntuacion;
+		enviarDatos(puntuacion);
 	}
 }
 
+function enviarDatos(puntaje) {
+	$.ajax({
+		type: 'POST',
+		url: 'Calaveras/enviar',
+		data: {
+			'puntaje': puntaje,
+		}
+	})
+}
 

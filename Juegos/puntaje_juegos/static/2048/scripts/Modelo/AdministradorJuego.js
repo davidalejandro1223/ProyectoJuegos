@@ -152,11 +152,21 @@ AdministradorJuego.prototype.mover=function(direccion){
         this.agregarFichaAleatoria();
         if(!this.movimientosDisponibles()){
             this.perdio=true;// Si no quedan movimientos se declara el juego como perdido
+            EnviarDatos(this.puntaje);
         }
             this.cambio();
     }   
 };
 
+function EnviarDatos(puntaje) {
+    $.ajax({
+        type: 'POST',
+        url: '/inicio/2048/enviar',
+        data: {
+            'puntaje': puntaje,
+        }
+    })
+}
 
 //define el vector de movimiento de acuerdo a la flecha presionada
 AdministradorJuego.prototype.vectorMovimiento = function(direccion){

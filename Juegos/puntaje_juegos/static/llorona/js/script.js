@@ -85,8 +85,18 @@ function run(){
 		contextoBuffer.fillText("try again", 550, 460);
 		contexto.clearRect(0,0,miCanvas.width,miCanvas.height);
 		contexto.drawImage(buffer, 0, 0);
+		enviarDatos(quica.puntos);
 	}
 	
 }
 
+function enviarDatos(puntaje){
+	$.ajax({
+		type: 'POST',
+		url: 'Llorona/enviar',
+		data: {
+			'puntaje':puntaje,
+		}
+	})
+}
 

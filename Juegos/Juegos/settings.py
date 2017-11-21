@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'videojuegos.apps.VideojuegosConfig',
     'usuario.apps.UsuarioConfig',
     'puntaje_juegos.apps.PuntajeJuegosConfig',
     'django.contrib.admin',
