@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'EludeAsteroids/enviar$', views.puntaje_elude),
     url(r'Calaveras/enviar$', views.puntaje_calavera),
     url(r'Charizard/enviar$', views.puntaje_charizard),
+    url(r'puntajes$', views.mostrar_puntajes)
 ]

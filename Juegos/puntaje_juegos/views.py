@@ -96,3 +96,39 @@ def puntaje_charizard(request):
             puntaje=puntaje, jugador=usuario, juego=juego)
         return HttpResponse("Guardado")
     return HttpResponse("Hola")
+
+
+#Muestra de puntajes
+@login_required(login_url='/')
+def mostrar_puntajes(request):
+    queryTopElude = Jugador_VideoJuego.objects.filter(juego=1)[:5]
+    queryTopLlorona = Jugador_VideoJuego.objects.filter(juego=2)[:5]
+    queryTopCalaveras = Jugador_VideoJuego.objects.filter(juego=3)[:5]
+    queryTop2048 = Jugador_VideoJuego.objects.filter(juego=4)[:5]
+    queryTopCharizard = Jugador_VideoJuego.objects.filter(juego=5)[:5]
+
+    queryEludePer = Jugador_VideoJuego.objects.filter(
+        jugador=request.user, juego=1)
+    queryLloronaPer = Jugador_VideoJuego.objects.filter(
+        jugador=request.user, juego=2)
+    queryCalaverasPer = Jugador_VideoJuego.objects.filter(
+        jugador=request.user, juego=3)
+    query2048Per = Jugador_VideoJuego.objects.filter(
+        jugador=request.user, juego=4)
+    queryCharizardPer = Jugador_VideoJuego.objects.filter(
+        jugador=request.user, juego=5)
+    
+
+    contexto = {
+        'topElude': queryTopElude,
+        'topLlorona': queryTopLlorona,
+        'topCalaveras': queryTopCalaveras,
+        'top2048': queryTop2048,
+        'topCharizard': queryTopCharizard,
+        'perElude': queryEludePer,
+        'perLlorona': queryLloronaPer,
+        'perCalaveras': queryCalaverasPer,
+        'per2048': query2048Per,
+        'perCharizard': queryCharizardPer,
+    }
+    return render(request, 'puntajes.html', contexto)

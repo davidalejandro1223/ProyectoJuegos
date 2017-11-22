@@ -7,7 +7,11 @@ html, body {
 
 body {
  margin: 0px 0; }
-  
+
+.alert{
+  display: none;
+}
+
 .cabecera:after {
   content: "";
   display: block;

@@ -25,7 +25,7 @@ SECRET_KEY = 'ejg-1cq8$dtje0vc4-%-_cfb*5n2dy0ohip!tn&e%qg=x%kyqv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition

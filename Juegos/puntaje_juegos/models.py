@@ -19,5 +19,8 @@ class Jugador_VideoJuego(models.Model):
     jugador = models.ForeignKey(User)
     juego = models.ForeignKey(Videojuego)
 
+    class Meta:
+        ordering = ('-puntaje',)
+
     def __int__(self):
         return self.id
