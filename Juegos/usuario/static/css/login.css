@@ -17,3 +17,15 @@ section{
 	padding: 2em;
 }
 
+.col-login > h4{
+	text-align: center;
+}
+
+.div-registro{
+	margin-top: 2em;
+}
+
+.div-registro > p{
+	text-align: center;
+	margin-bottom: .5em;
+}

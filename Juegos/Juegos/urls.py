@@ -18,6 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('usuario.urls')),
+    url(r'^', include('usuario.urls', namespace='usuarios')),
     url(r'^', include('puntaje_juegos.urls')),
 ]
