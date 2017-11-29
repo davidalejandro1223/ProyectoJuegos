@@ -8,6 +8,8 @@ from django.http.response import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView
 from django.core.urlresolvers import reverse_lazy
+from django.contrib.auth.forms import UserCreationForm
+from django import forms
 
 # Create your views here.
 
@@ -19,16 +21,16 @@ def autenticar(request):
         user = authenticate(username=usuario, password=contrasena)
         if user is not None:
             login(request, user)
-            return redirect('inicio')           
+            return redirect('usuarios:inicio')           
         else:
-            return HttpResponse('usuario no existe')
+            return HttpResponse('usuario no existe o contraseña incorrecta')
 
     return render(request, 'login.html', {})
 
 @login_required(login_url = '/')
 def desautenticar(request):
     logout(request)
-    return redirect('autenticar')
+    return redirect('usuarios:autenticar')
 
 @login_required(login_url = '/')
 def inicio(request):
