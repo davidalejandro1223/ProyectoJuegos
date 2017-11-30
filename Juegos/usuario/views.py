@@ -6,10 +6,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http.response import HttpResponse
 from django.contrib.auth.decorators import login_required
-from django.views.generic.edit import CreateView
 from django.core.urlresolvers import reverse_lazy
-from django.contrib.auth.forms import UserCreationForm
-from django import forms
+from .forms import RegistroForm
 
 # Create your views here.
 
@@ -39,7 +37,16 @@ def inicio(request):
     }
     return render(request, 'inicio.html', context)
 
-class Registro (CreateView):
-    model = User
-    fields = ['username', 'password', 'email', 'first_name', 'last_name']
-    success_url = reverse_lazy('usuarios:autenticar')
+def Registro (request):
+    if request.method == 'POST':
+        form = RegistroForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('usuarios:inicio')
+    else:
+        form = RegistroForm()
+    return render(request, 'user_form.html', {'form': form})
